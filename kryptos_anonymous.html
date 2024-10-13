@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kryptos Anonymous Message Board</title>
+    <style>
+        body {
+            background-color: #000000; /* Black background */
+            color: #C0C0C0; /* Silver text */
+            font-family: 'Times New Roman', serif;
+            text-align: center;
+        }
+
+        h1, p {
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+        }
+
+        img {
+            width: 50px; /* Adjust logo size as needed */
+            height: auto;
+            vertical-align: middle; /* Align logo vertically with text */
+        }
+
+        .message-board-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns */
+            grid-gap: 20px;
+            margin-top: 20px;
+        }
+
+        .message {
+            background-color: rgba(192, 192, 192, 0.5); /* Light grey with 50% opacity */
+            padding: 15px;
+            border-radius: 5px;
+            color: #FFFFFF; /* White text for the post */
+            position: relative;
+        }
+
+        button {
+            background-color: #2E8B57; /* Green (Slytherin-like) */
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        /* Kryptos title */
+        #kryptos-title {
+            color: #39FF14; /* Neon green color */
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Comment section */
+        .comment-section {
+            margin-top: 10px;
+            display: none; /* Initially hidden */
+            background-color: rgba(255, 255, 255, 0.8); /* Light background for comments */
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .comment-input {
+            width: 80%;
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+        .comments {
+            margin-top: 10px;
+            text-align: left; /* Align comments to the left */
+        }
+
+        .comment {
+            margin-top: 5px;
+            color: #000000; /* Black text for comments */
+            font-weight: normal; /* Normal font weight for comments */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo-container">
+            <img src="logo.png" alt="Kryptos Logo">
+            <h1 id="kryptos-title">KRYPTOS</h1> <!-- Neon green text -->
+        </div>
+        
+        <div class="message-board-container" id="message-board-container">
+            <!-- Message boxes will be created here -->
+        </div>
+    </div>
+
+    <script>
+        // Sample anonymous messages
+        const messages = [
+            "I love the way this community supports each other.",
+            "Keep being awesome, everyone!",
+            "Just wanted to say that you are not alone.",
+            "Life is tough, but so are you!",
+            "Anyone else feel like they have a lot to say?",
+            "Happiness comes from within, don't forget that!",
+            "Your voice matters, make it heard.",
+            "It's okay to ask for help when you need it.",
+            "Remember to be kind to yourself.",
+            "Every day may not be good, but there’s something good in every day.",
+            "Don't give up, keep pushing forward!",
+            "Today is a new day, embrace it!",
+            "Believe in yourself and all that you are.",
+            "You are stronger than you think.",
+            "It's okay to not be okay sometimes.",
+            "Take a deep breath, you got this.",
+            "Be the reason someone smiles today.",
+            "You are capable of amazing things!",
+            "Make today so awesome that yesterday gets jealous.",
+            "Believe you can and you're halfway there."
+        ];
+
+        // Sample random usernames for comments
+        const usernames = [
+            "User1", "User2", "User3", "User4", "User5",
+            "User6", "User7", "User8", "User9", "User10",
+            "User11", "User12", "User13", "User14", "User15",
+            "User16", "User17", "User18", "User19", "User20"
+        ];
+
+        // Create message boxes
+        const messageBoardContainer = document.getElementById("message-board-container");
+        messages.forEach((message, index) => {
+            const messageBox = document.createElement("div");
+            messageBox.className = "message";
+            messageBox.textContent = message;
+
+            // Create a comment button
+            const commentButton = document.createElement("button");
+            commentButton.textContent = "Show Comments";
+
+            // Create comment section
+            const commentSection = document.createElement("div");
+            commentSection.className = "comment-section";
+
+            const commentInput = document.createElement("input");
+            commentInput.type = "text";
+            commentInput.placeholder = "Type your comment here...";
+            commentInput.className = "comment-input";
+
+            const submitButton = document.createElement("button");
+            submitButton.textContent = "Submit";
+            submitButton.onclick = () => {
+                const comment = commentInput.value;
+                if (comment) {
+                    const commentDisplay = document.createElement("div");
+                    const randomUsername = usernames[Math.floor(Math.random() * usernames.length)];
+                    commentDisplay.innerHTML = `<span class="comment">${randomUsername}: ${comment}</span>`;
+                    commentSection.appendChild(commentDisplay);
+                    commentInput.value = ""; // Clear input after submission
+                } else {
+                    alert("Please enter a comment before submitting.");
+                }
+            };
+
+            // Toggle the comment section on button click
+            commentButton.onclick = () => {
+                commentSection.style.display = commentSection.style.display === "none" ? "block" : "none";
+            };
+
+            commentSection.appendChild(commentInput);
+            commentSection.appendChild(submitButton);
+            messageBox.appendChild(commentButton);
+            messageBox.appendChild(commentSection);
+            messageBoardContainer.appendChild(messageBox);
+        });
+    </script>
+</body>
+</html>
